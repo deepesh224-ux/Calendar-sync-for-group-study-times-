@@ -2,16 +2,13 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 
-const dummyMatches = [
-  { name: 'Alice', subject: 'Math', availability: 'Mon 5pm' },
-  { name: 'Bob', subject: 'Math', availability: 'Wed 3pm' },
-  { name: 'Carol', subject: 'History', availability: 'Tue 2pm' },
-];
+import { useMatches } from '../context/MatchContext';
 
 export default function MatchListScreen({ navigation, route }) {
+  const { matches } = useMatches();
   const { subject, schedule } = route.params;
 
-  const filteredMatches = dummyMatches.filter((match) => !subject ? match.subject.toLowerCase() !== subject.toLowerCase() : match.subject.toLowerCase() === subject.toLowerCase() && !schedule ? match.availability.toLowerCase() !== schedule.toLowerCase() : match.availability.toLowerCase() === schedule.toLowerCase());
+  const filteredMatches = matches.filter((match) => !subject ? match.subject.toLowerCase() !== subject.toLowerCase() : match.subject.toLowerCase() === subject.toLowerCase() && !schedule ? match.availability.toLowerCase() !== schedule.toLowerCase() : match.availability.toLowerCase() === schedule.toLowerCase());
   // TODO: Filter dummyMatches by subject/schedule if needed
   return (
     <FlatList
