@@ -10,13 +10,18 @@ const initialMatches = [
 
 export const MatchProvider = ({ children }) => {
     const [matches, setMatches] = useState(initialMatches);
+    const [mymatches, setMymatches] = useState([]);
+
+    const addMyMatch = (match) => {
+        setMymatches((prevMatches) => [...prevMatches, match]);
+    };
 
     const addMatch = (match) => {
         setMatches((prevMatches) => [...prevMatches, match]);
     };
 
     return (
-        <MatchContext.Provider value={{ matches, setMatches, addMatch }}>
+        <MatchContext.Provider value={{ matches, setMatches, addMatch, mymatches, setMymatches, addMyMatch }}>
             {children}
         </MatchContext.Provider>
     );

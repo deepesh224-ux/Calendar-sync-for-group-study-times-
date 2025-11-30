@@ -7,10 +7,11 @@ export default function AddStudySchedule({ navigation }) {
     const [subject, setSubject] = React.useState('');
     const [availability, setAvailability] = React.useState('');
     const [name, setName] = React.useState('');
-    const { addMatch } = useMatches();
+    const { addMatch, addMyMatch } = useMatches();
 
     const handleAdd = () => {
         addMatch({ name, subject, availability });
+        addMyMatch({ name, subject, availability });
         navigation.goBack();
     };
 

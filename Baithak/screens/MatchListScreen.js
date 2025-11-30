@@ -5,10 +5,23 @@ import { Card, Text } from 'react-native-paper';
 import { useMatches } from '../context/MatchContext';
 
 export default function MatchListScreen({ navigation, route }) {
-  const { matches } = useMatches();
+  const { matches, mymatches } = useMatches();
   const { subject, schedule } = route.params;
 
-  const filteredMatches = matches.filter((match) => !subject ? match.subject.toLowerCase() !== subject.toLowerCase() : match.subject.toLowerCase() === subject.toLowerCase() && !schedule ? match.availability.toLowerCase() !== schedule.toLowerCase() : match.availability.toLowerCase() === schedule.toLowerCase());
+  const filteredMatches = matches.filter((match) => {
+    const isMyMatch = mymatches.some(
+      (myMatch) =>
+        myMatch.name === match.name &&
+        myMatch.subject === match.subject &&
+        myMatch.availability === match.availability
+    );
+    if (isMyMatch) return false;
+
+    const matchesSubject = !subject || match.subject.toLowerCase() === subject.toLowerCase();
+    const matchesSchedule = !schedule || match.availability.toLowerCase() === schedule.toLowerCase();
+
+    return matchesSubject && matchesSchedule;
+  });
   // TODO: Filter dummyMatches by subject/schedule if needed
   return (
     <FlatList
