@@ -5,6 +5,7 @@ import HomeScreen from './screens/HomeScreen';
 import SubjectScreen from './screens/SubjectScreen';
 import MatchListScreen from './screens/MatchListScreen';
 import ChatScreen from './screens/ChatScreen';
+import AddStudySchedule from './screens/AddStudySchedule';
 import { MatchProvider } from './context/MatchContext';
 
 const Stack = createNativeStackNavigator();
@@ -16,6 +17,7 @@ export default function App() {
         <NavigationContainer>{/* NavigationContainer manages nav state:contentReference[oaicite:4]{index=4} */}
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="AddStudySchedule" component={AddStudySchedule} />
             <Stack.Screen name="Subjects" component={SubjectScreen} />
             <Stack.Screen name="Matches" component={MatchListScreen} />
             <Stack.Screen name="Chat" component={ChatScreen} />
