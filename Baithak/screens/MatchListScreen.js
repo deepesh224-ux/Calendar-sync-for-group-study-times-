@@ -10,7 +10,8 @@ const dummyMatches = [
 
 export default function MatchListScreen({ navigation, route }) {
   const { subject, schedule } = route.params;
-  const filteredMatches = dummyMatches.filter((match) => match.subject.toLowerCase() === subject.toLowerCase() && match.availability.toLowerCase() === schedule.toLowerCase());
+
+  const filteredMatches = dummyMatches.filter((match) => !subject ? match.subject.toLowerCase() !== subject.toLowerCase() : match.subject.toLowerCase() === subject.toLowerCase() && !schedule ? match.availability.toLowerCase() !== schedule.toLowerCase() : match.availability.toLowerCase() === schedule.toLowerCase());
   // TODO: Filter dummyMatches by subject/schedule if needed
   return (
     <FlatList
